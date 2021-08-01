@@ -38,7 +38,12 @@ export const updatePost = async (req, res) => {
 
     const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
 
-    await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+    const post = await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+    
+    updatedPost.name = post.name;
+    updatedPost.likeCount = post.likeCount;
+    updatedPost.likes = post.likes;
+    updatedPost.createdAt = post.createdAt;
 
     res.json(updatedPost);
 }

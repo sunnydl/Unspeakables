@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardActions, CardMedia, CardHeader, Button, Typography, Avatar, Chip } from '@material-ui/core/';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -49,10 +49,10 @@ const Post = ({ post, setCurrentId }) => {
           </div>
         }
       ></CardHeader>
-      <Link to={`/detail/${post._id}`}>
+      <Link to={`/detail?post_id=${post._id}&edit=${false}`}>
         <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
       </Link>
-      <Link to={`/edit/${post._id}`}>
+      <Link to={`/detail?post_id=${post._id}&edit=${true}`}>
         <div className={classes.overlay2}>
           {showFeature && <Button style={{ color: 'black' }} size="small" onClick={() => {setCurrentId(post._id)}}><EditIcon fontSize="default" /></Button>}
         </div>

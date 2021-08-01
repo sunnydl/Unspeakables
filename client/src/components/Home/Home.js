@@ -93,7 +93,7 @@ function Home() {
           </div>
           <Grid container justify="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={7}>
-              {loading? <CircularProgress color="primary" size="10rem" thickness={5} />:<Posts setCurrentId={setCurrentId} tags={tags} posts={posts} />}
+              {loading? <CircularProgress color="primary" size="10rem" thickness={5} />:<Posts setCurrentId={setCurrentId} />}
             </Grid>
             <Grid item xs={12} sm={4}>
               <Form currentId={currentId} setCurrentId={setCurrentId} tags={tags} setSearchTags={setSearchTags} setSearching={setSearching} setPage={setPage}/>

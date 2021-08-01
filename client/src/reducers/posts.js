@@ -6,7 +6,7 @@ const postsReducer = (posts = [], action) => {
             return action.payload
         case LIKE_POST:
         case UPDATE_POST:
-            return posts.map(post => post._id===action.payload._id? action.payload: post);
+            return posts.map((post) => post._id===action.payload._id? action.payload:post);
         case ADD_POST:
             return [...posts, action.payload];
         case SORT_POST:

@@ -9,44 +9,26 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import UpdateIcon from '@material-ui/icons/Update';
 import ImageUploader from 'react-images-upload';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPostDetail } from '../../api/index'
+import { useHistory } from 'react-router';
 import { likePost, deletePost, updatePost } from '../../actions/posts'
 
 import useStyles from './styles';
 
-export default function DetailedPage({ match }) {
+export default function DetailedPage({ location }) {
 
+    const history = useHistory();
+    const query = new URLSearchParams(location.search);
     const classes = useStyles();
     const dispatch = useDispatch();
-    const post_id = match.params.post_id;
-    const [post, setPost] = useState(null);
-    const [user, setUser] = useState(null);
-    const [postData, setPostData] = useState({
-        title: '',
-        message: '',
-        tags: '',
-        selectedFile: ''
-    });
-    const [showFeature, setShowFeature] = useState(false);
-    const [showEdit, setShowEdit] = useState(false);
-
-    useEffect(() => {
-        const getDetail = async() => {
-            if(!post_id) {
-                return;
-            }
-            try {
-                const { data } = await fetchPostDetail(post_id);
-                setPost(data);
-                setPostData(data);
-                setUser(JSON.parse(localStorage.getItem('profile'))?.result);
-                setShowFeature(user && ((user?.googleId===post.creator)||(user?._id===post.creator)));
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        getDetail();
-    }, [post_id, user?.googleId, user?._id]);
+    const post_id = query.get('post_id');
+    const edit = query.get('edit');
+    console.log(post_id);
+    console.log(edit);
+    const post = useSelector((state) => state.posts.find((element) => element._id===post_id));
+    const user = JSON.parse(localStorage.getItem('profile'))?.result;
+    const [postData, setPostData] = useState(post);
+    const showFeature = user && ((user?.googleId===post.creator)||(user?._id===post.creator));
+    const [showEdit, setShowEdit] = useState(edit==='true'? true:false);
 
     const handleDelete = (creator, id) => {
         if(user?.googleId){
@@ -58,16 +40,17 @@ export default function DetailedPage({ match }) {
             dispatch(deletePost(id));
             }
         }
+        history.push('/');
     }
 
     const EditOnClick = () => {
+        setPostData(post)
         setShowEdit(!showEdit);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updatePost(post_id, { ...postData, name: user?.result?.name }));
-        console.log(post_id);
         cancelEdit();
     }
 

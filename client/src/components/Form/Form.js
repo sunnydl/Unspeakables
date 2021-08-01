@@ -38,12 +38,12 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
         e.preventDefault();
         if(currentId){
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
-            console.log(currentId);
         } else {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
         }
         setCurrentId(0);
         clear();
+        window.location.reload();
     }
 
     const clear = () => {
