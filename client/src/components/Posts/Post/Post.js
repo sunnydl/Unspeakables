@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardActions, CardMedia, CardHeader, Button, Typography, Avatar, Chip } from '@material-ui/core/';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -39,12 +39,12 @@ const Post = ({ post, setCurrentId }) => {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {post.name.charAt(0)}
+            {post.nickName.charAt(0)}
           </Avatar>
         }
         title={
           <div>
-            <Typography variant="h6">{post.name}</Typography>
+            <Typography variant="h6">{post.nickName}</Typography>
             <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
           </div>
         }

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import FileBase from 'react-file-base64';
+import ImageUploader from 'react-images-upload';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import TitleIcon from '@material-ui/icons/Title';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import SendIcon from '@material-ui/icons/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
@@ -21,7 +21,8 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
         title: '',
         message: '',
         tags: '',
-        selectedFile: ''
+        selectedFile: '',
+        nickName: '',
     });
     const dispatch = useDispatch();
     const post = useSelector(state => currentId? state.posts.find(post => post._id===currentId): null);
@@ -43,6 +44,7 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
         }
         setCurrentId(0);
         clear();
+        hideForm();
         window.location.reload();
     }
 
@@ -51,7 +53,8 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
             title: '',
             message: '',
             tags: '',
-            selectedFile: ''
+            selectedFile: '',
+            nickName: '',
         })
     }
     
@@ -73,6 +76,21 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
             setSearching(false);
         }
         setSearchTags(value);
+    }
+
+    const onUpload = (picture) => {
+        if(picture.length) {
+            const getBase64 = (file, callback) => {
+                const reader = new FileReader();
+                reader.addEventListener('load', () => callback(reader.result));
+                reader.readAsDataURL(file);
+            }
+            getBase64(picture[0], function(base64Data) {
+                setPostData({ ...postData, selectedFile: base64Data })
+            });
+        } else {
+            setPostData({ ...postData, selectedFile: post.selectedFile })
+        }
     }
 
     if(!user?.result?.name) {
@@ -123,7 +141,22 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
                     <LoyaltyIcon/>
                     <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
                 </div>
-                <div className={classes.fileInput}><AddPhotoAlternateIcon/><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+                <div>
+                    <AccountCircleIcon/>
+                    <TextField name="nickName" variant="outlined" label="Your nickname" fullWidth value={postData.nickName} onChange={(e) => setPostData({ ...postData, nickName: e.target.value })} />
+                </div>
+                <div className={classes.imageUpload}>
+                    <ImageUploader
+                        withIcon={true}
+                        withPreview
+                        singleImage
+                        label="Upload your image here"
+                        buttonText='Choose images'
+                        onChange={onUpload}
+                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        maxFileSize={5242880}
+                    />
+                </div>
                 <Button className={classes.buttonSubmit} variant="contained" style={{ backgroundColor: '#339900' }} size="large" type="submit" fullWidth>
                     <SendIcon/>Share
                 </Button>

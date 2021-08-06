@@ -26,5 +26,9 @@ export default makeStyles((theme) => ({
   formComponent: {
     display: 'flex',
     flexWrap: 'wrap',
-  }
+  },
+  imageUpload: {
+    margin: 'auto',
+    width: '75%',
+  },
 }));

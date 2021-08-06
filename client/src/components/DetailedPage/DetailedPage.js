@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Typography, TextField, Grow, Container, Paper, CircularProgress, Button } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -7,6 +7,7 @@ import TitleIcon from '@material-ui/icons/Title';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import UpdateIcon from '@material-ui/icons/Update';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ImageUploader from 'react-images-upload';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
@@ -123,6 +124,10 @@ export default function DetailedPage({ location }) {
                                 <div>
                                     <LoyaltyIcon/>
                                     <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
+                                </div>
+                                <div>
+                                    <AccountCircleIcon/>
+                                    <TextField name="nickName" variant="outlined" label="Your nickname" fullWidth value={postData.nickName} onChange={(e) => setPostData({ ...postData, nickName: e.target.value })} />
                                 </div>
                                 <div className={classes.imageUpload}>
                                     <ImageUploader
