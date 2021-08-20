@@ -49,10 +49,10 @@ const Post = ({ post, setCurrentId }) => {
           </div>
         }
       ></CardHeader>
-      <Link to={`/detail?post_id=${post._id}&edit=${false}`}>
+      <Link to={`/Home/detail/${post._id}?edit=${false}`}>
         <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
       </Link>
-      <Link to={`/detail?post_id=${post._id}&edit=${true}`}>
+      <Link to={`/Home/detail/${post._id}?edit=${true}`}>
         <div className={classes.overlay2}>
           {showFeature && <Button style={{ color: 'black' }} size="small" onClick={() => {setCurrentId(post._id)}}><EditIcon fontSize="default" /></Button>}
         </div>

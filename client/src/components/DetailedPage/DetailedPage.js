@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, TextField, Grow, Container, Paper, CircularProgress, Button } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,26 +10,29 @@ import UpdateIcon from '@material-ui/icons/Update';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ImageUploader from 'react-images-upload';
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { likePost, deletePost, updatePost } from '../../actions/posts'
+import { getPostDetail } from '../../actions/post'
 
 import useStyles from './styles';
 
 export default function DetailedPage({ location }) {
 
     const history = useHistory();
+    const { post_id } = useParams();
     const query = new URLSearchParams(location.search);
     const classes = useStyles();
     const dispatch = useDispatch();
-    const post_id = query.get('post_id');
     const edit = query.get('edit');
-    console.log(post_id);
-    console.log(edit);
-    const post = useSelector((state) => state.posts.find((element) => element._id===post_id));
+    const post = useSelector((state) => state.post);
     const user = JSON.parse(localStorage.getItem('profile'))?.result;
     const [postData, setPostData] = useState(post);
     const showFeature = user && ((user?.googleId===post.creator)||(user?._id===post.creator));
     const [showEdit, setShowEdit] = useState(edit==='true'? true:false);
+
+    useEffect(() => {
+        dispatch(getPostDetail(post_id))
+    }, [post_id, dispatch])
 
     const handleDelete = (creator, id) => {
         if(user?.googleId){
@@ -107,7 +110,7 @@ export default function DetailedPage({ location }) {
                         </div>
                     </Paper> : <CircularProgress color="primary" size="10rem" thickness={5} />}
                     
-                    {showEdit && <Grow in={showEdit}><div className={classes.formContainer}>
+                    {(showEdit && showFeature) && <Grow in={showEdit}><div className={classes.formContainer}>
                         <Paper className={classes.formWrapper}>
                             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                                 <Typography variant="h6" className={classes.editHeading}>

@@ -50,7 +50,7 @@ const Auth = () => {
         const token = res?.tokenId;
         try{
             dispatch({ type: 'GOOGLE_LOGIN', payload: { result, token } });
-            history.push('/');
+            history.push('/Home');
         } catch(err){
             console.log(err);
         }

@@ -14,7 +14,6 @@ function Home() {
     const [tags, setTags] = useState([]);
     const [searchTags, setSearchTags] = useState([]);
     const [totalCount, setTotalCount] = useState(undefined);
-    const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searching, setSearching] = useState(false);
     const [showSort, setShowSort] = useState(false);
@@ -24,9 +23,9 @@ function Home() {
   
     useEffect(() => {
       if(!searching && !showSort) {
-        dispatch(getPosts(page, 6, setPosts, setTotalCount, setLoading, setTags));
+        dispatch(getPosts(page, 6, setTotalCount, setLoading, setTags));
       } else {
-        dispatch(getSortedPosts(page, 6, searchTags, setPosts, setTotalCount, setLoading, sortBy));
+        dispatch(getSortedPosts(page, 6, searchTags, setTotalCount, setLoading, sortBy));
       }
     }, [currentId, page, searching, searchTags, sortBy, dispatch]);
 

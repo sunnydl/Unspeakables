@@ -18,6 +18,7 @@ function Navbar() {
     const logout = () => {
       dispatch({ type: 'LOGOUT' })
       history.push('/');
+      window.location.reload();
       setUser(null);
     }
 
@@ -38,7 +39,7 @@ function Navbar() {
         <AppBar className={classes.appBar} position="static" color="inherit">
           <div className={classes.brandContainer}>
             <img className={classes.image} src={MernIcon} alt="icon" height="60" />
-            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Unspeakables</Typography>
+            <Typography component={Link} to="/Home" className={classes.heading} variant="h2" align="center">Unspeakables</Typography>
           </div>
           <Toolbar className={classes.toolbar}>
             {user?.result ? (
@@ -48,7 +49,7 @@ function Navbar() {
                 <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
               </div>
             ) : (
-              <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+              <Button component={Link} to="/Home/auth" variant="contained" color="primary">Sign In</Button>
             )}
           </Toolbar>
         </AppBar>

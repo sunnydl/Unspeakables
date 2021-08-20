@@ -1,11 +1,10 @@
 import { GET_POSTS, ADD_POST, UPDATE_POST, DELETE_POST, LIKE_POST, SORT_POST } from './types';
 import * as api from '../api';
 
-export const getPosts = (page, limit, setPosts, setTotalCount, setLoading, setTags) => async (dispatch) => {
+export const getPosts = (page, limit, setTotalCount, setLoading, setTags) => async (dispatch) => {
     try{
         setLoading(true);
         const { data } = await api.fetchPosts(page, limit);
-        setPosts(data.postMessages);
         setTotalCount(data.totalCount);
         setTags(data.tags);
         dispatch({
@@ -19,11 +18,10 @@ export const getPosts = (page, limit, setPosts, setTotalCount, setLoading, setTa
     }
 }
 
-export const getSortedPosts = (page, limit, tags, setPosts, setTotalCount, setLoading, sortBy) => async (dispatch) => {
+export const getSortedPosts = (page, limit, tags, setTotalCount, setLoading, sortBy) => async (dispatch) => {
     try{
         setLoading(true);
         const { data } = await api.fetchSortedPosts(page, limit, tags, sortBy);
-        setPosts(data.postMessages);
         setTotalCount(data.totalCount);
         dispatch({
             type: SORT_POST,
