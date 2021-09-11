@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Container, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import welcomeImage from '../../images/welcomeImage.jpg'
 import useStyles from './styles'
 
 export default function LandingPage() {
@@ -12,8 +11,11 @@ export default function LandingPage() {
         <div>
             <Container className={classes.welcomeContainer}>
                 <Paper className={classes.welcomePage} variant="outlined">
-                    <img src={welcomeImage} alt="welcomeImage" style={{ overflow: 'hidden', width: '100%' }} />
-                    <Button component={Link} to="/Home">hi I am Button</Button>
+                    <div className={classes.buttonGroup}>
+                        <Button component={Link} to="/Home" variant="contained" color="secondary" className={classes.welcomeButton}>Explore secrets First</Button>
+                        <br />
+                        <Button component={Link} to="/Home/auth" variant="contained" color="primary" className={classes.welcomeButton}>Sign in first</Button>
+                    </div>
                 </Paper>
             </Container>
         </div>
