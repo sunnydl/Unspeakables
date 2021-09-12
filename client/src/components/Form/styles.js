@@ -31,4 +31,8 @@ export default makeStyles((theme) => ({
     margin: 'auto',
     width: '75%',
   },
+  displayImage: {
+    width: '100%',
+    overflow: 'hidden',
+  }
 }));

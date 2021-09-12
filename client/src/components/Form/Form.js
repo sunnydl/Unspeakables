@@ -12,8 +12,8 @@ import SendIcon from '@material-ui/icons/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
 import { Link } from 'react-router-dom';
-import animeNodding from '../../images/animeNodding.gif';
-import animeQuestion from '../../images/animeQuestion.jpg';
+import curious from '../../images/curious.gif';
+import secret from '../../images/secret.jpg';
 
 const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setPage }) => {
     const classes = useStyles();
@@ -96,9 +96,9 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
     if(!user?.result?.name) {
         return (
             <Paper className={classes.paper}>
-                <img src={animeQuestion} alt="animeQuestion" style={{ overflow: 'hidden', width: '100%' }} />
+                <img src={secret} alt="secret" className={classes.displayImage} />
                 <Typography variant="h6" align="center">
-                    <Button component={ Link } to="/auth" variant="contained" color="primary">Sign in to share a secret of yours</Button>
+                    <Button component={ Link } to="/Home/auth" variant="contained" color="primary">Sign in to share a secret of yours</Button>
                     <br />
                     Or search below
                     <br />
@@ -164,7 +164,7 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
                 <Button variant="contained" color="secondary" size="small" onClick={hideForm} fullWidth>Cancel</Button>
             </form>
             :<div>
-                <img src={animeNodding} alt="animeNodding" style={{ overflow: 'hidden', width: '100%' }}/>
+                <img src={curious} alt="curious" className={classes.displayImage}/>
                 <Typography variant="h6" align="center">
                     <Button variant="contained" color="primary" onClick={changeShowForm} fullWidth>Start sharing your secret</Button>
                     <br />

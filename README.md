@@ -50,11 +50,10 @@ npm start
 ###### And the website would automatically open in your web browser
 
 ### Credits:
-* background image src: https://curiosityhuman.com/how-to-find-good-background-music-for-your-videos/
+* background image src: https://wallpaperboat.com/chill-wallpapers
 * icon image src: Photo by <a href="https://unsplash.com/@sebastiaanstam?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">sebastiaan stam</a> on <a href="https://unsplash.com/s/photos/mask?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
-* anime question pic src: https://blog.sakugabooru.com/2017/01/18/sakuqa-anime-industry-and-production-questions-2/
-* Anime nodding pic src: https://knowyourmeme.com/photos/892427-anime-manga
+* Pre login display pic src: medium:after_download_modal.copy_text.photo: https://www.pexels.com/photo/closeup-photography-of-adult-short-coated-tan-and-white-dog-sleeping-on-gray-textile-at-daytime-731022/
+* Post login display pic src: https://giphy.com/gifs/makes-highqualitygifs-Maz1hoeGskARW
 * favicon src: https://icons8.com/icon/122769/notre-dame
-* UI design is inspired by [Javascript Mastery](https://www.youtube.com/channel/UCmXmlB4-HJytD7wek0Uo97A)
-
+* UI design was inspired by [Javascript Mastery](https://www.youtube.com/channel/UCmXmlB4-HJytD7wek0Uo97A)
