@@ -1,6 +1,6 @@
 ## Mern full stack website: [Unspeakables](https://unspeakables.netlify.app/)
 
-![project_screenshot](https://user-images.githubusercontent.com/56567343/127726233-33cac38d-7876-41bd-ba33-46bd11fc1433.png)
+![image](https://user-images.githubusercontent.com/56567343/133001589-6e1968e5-2532-403d-a229-e7348220da4e.png)
 
 ### Introduction
 In this project I built a full stack website using Mongodb, Expressjs, Reactjs, and Nodejs with CRUD APIs and user authentication functionality that also allows google login.
@@ -19,6 +19,8 @@ title, secret content, and like counts. And of course, only the owner of the sec
 * Create-react-app as starting point
 * Netlify for frontend deployment
 * Heroku for backend deployment
+
+![image](https://user-images.githubusercontent.com/56567343/133001636-ba760ef8-988a-48ac-90d9-9724de667990.png)
 
 ### Prerequisite (for local development)
 * [Node.js](https://nodejs.org/en/download/)
