@@ -25,7 +25,7 @@ export const getSortedPosts = (page, limit, tags, setTotalCount, setLoading, sor
         setTotalCount(data.totalCount);
         dispatch({
             type: SORT_POST,
-            payload: data,
+            payload: data.postMessages,
         });
         setLoading(false);
     } catch(err) {
