@@ -1,4 +1,4 @@
-import { GET_POSTS, ADD_POST, UPDATE_POST, DELETE_POST, LIKE_POST, SORT_POST } from './types';
+import { GET_POSTS, ADD_POST, UPDATE_POST, DELETE_POST, LIKE_POST, SORT_POST, GET_POST } from './types';
 import * as api from '../api';
 
 export const getPosts = (page, limit, setTotalCount, setLoading, setTags) => async (dispatch) => {
@@ -51,6 +51,7 @@ export const updatePost = (id, post) => async (dispatch) => {
       const { data } = await api.updatePost(id, post);
 
       dispatch({ type: UPDATE_POST, payload: data });
+      dispatch({ type: GET_POST, payload: data });
     } catch (error) {
       console.log(error.message);
     }
@@ -68,13 +69,17 @@ export const deletePost = (id) => async (dispatch) => {
     }
 }
 
-export const likePost = (id) => async (dispatch) => {
+export const likePost = (id, setPostData, isDetailPage) => async (dispatch) => {
     try{
         const { data } = await api.likePost(id);
         dispatch({
             type: LIKE_POST,
             payload: data
         })
+        dispatch({ type: GET_POST, payload: data });
+        if(isDetailPage) {
+            setPostData(data);
+        }
     } catch(err) {
         console.log(err);
     }

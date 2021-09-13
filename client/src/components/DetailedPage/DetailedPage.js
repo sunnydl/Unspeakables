@@ -31,7 +31,7 @@ export default function DetailedPage({ location }) {
     const [showEdit, setShowEdit] = useState(edit==='true'? true:false);
 
     useEffect(() => {
-        dispatch(getPostDetail(post_id))
+        dispatch(getPostDetail(post_id, setPostData))
     }, [post_id, dispatch])
 
     const handleDelete = (creator, id) => {
@@ -44,7 +44,7 @@ export default function DetailedPage({ location }) {
             dispatch(deletePost(id));
             }
         }
-        history.push('/');
+        history.push('/Home');
     }
 
     const EditOnClick = () => {
@@ -55,7 +55,7 @@ export default function DetailedPage({ location }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updatePost(post_id, { ...postData, name: user?.result?.name }));
-        cancelEdit();
+        setShowEdit(false);
     }
 
     const onUpload = (picture) => {
@@ -87,24 +87,24 @@ export default function DetailedPage({ location }) {
                 {post? 
                     <Paper className={classes.paper}>
                         <Typography variant="h5" className={classes.postTitle}>
-                            {post.title}
+                            {postData.title}
                         </Typography>
                         <div className={classes.postDiv}>
                             <img 
-                                src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} 
+                                src={postData.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} 
                                 alt="postImg" 
                                 style={{ overflow: 'hidden', width: '40%' }}
                             />
                             <div className={classes.postContent}>
                                 <div className={classes.details}>
-                                    <Typography variant="h6" color="textSecondary" component="p" style={{ fontFamily: 'Comic Sans MS' }}>{post.message}</Typography>
+                                    <Typography variant="h6" color="textSecondary" component="p" style={{ fontFamily: 'Comic Sans MS' }}>{postData.message}</Typography>
                                 </div>
                             </div>
                             <div className={classes.buttons}>
                                 {showFeature && <Button size="small" color="primary" onClick={EditOnClick}><EditIcon/>Edit</Button>}
                                 <div className={classes.subButtons}>
-                                    <Button size="small" color="primary" disabled={!user} onClick={() => {dispatch(likePost(post._id))}}><FavoriteIcon fontSize="small" /> Like {post.likeCount} </Button>
-                                    {showFeature && <Button size="small" color="primary" onClick={() => handleDelete(post.creator, post._id)}><DeleteIcon fontSize="small" /> Delete</Button>}
+                                    <Button size="small" color="primary" disabled={!user} onClick={() => {dispatch(likePost(post._id, setPostData, true))}}><FavoriteIcon fontSize="small" /> Like {postData.likeCount} </Button>
+                                    {showFeature && <Button size="small" color="primary" onClick={() => handleDelete(postData.creator, postData._id)}><DeleteIcon fontSize="small" /> Delete</Button>}
                                 </div>
                             </div>
                         </div>

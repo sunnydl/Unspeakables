@@ -62,7 +62,7 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       <Typography className={classes.title} gutterBottom variant="h5" component="h2" style={{ fontFamily: 'Comic Sans MS' }}>{post.title}</Typography>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" disabled={!user} onClick={() => {dispatch(likePost(post._id))}}><FavoriteIcon fontSize="small" /> Like {post.likeCount} </Button>
+        <Button size="small" color="primary" disabled={!user} onClick={() => {dispatch(likePost(post._id, null, false))}}><FavoriteIcon fontSize="small" /> Like {post.likeCount} </Button>
         {showFeature && <Button size="small" color="primary" onClick={() => handleDelete(post.creator, post._id)}><DeleteIcon fontSize="small" /> Delete</Button>}
       </CardActions>
     </Card>

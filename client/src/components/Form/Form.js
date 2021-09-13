@@ -45,7 +45,6 @@ const Form = ({ currentId, setCurrentId, tags, setSearchTags, setSearching, setP
         setCurrentId(0);
         clear();
         hideForm();
-        window.location.reload();
     }
 
     const clear = () => {
