@@ -9,7 +9,7 @@ to see using the search bar to select tags that interest them. Each secret post 
 title, secret content, and like counts. And of course, only the owner of the secret post can delete their post, the users can click the like button to increase the like counts of a post, and if they click again, it will redo the like action and decrease like counts.
 
 ### Technologies I used
-* Javascript
+* JavaScript
 * HTML/CSS
 * Reactjs for the frontend
 * Nodejs and Expressjs for the backend
